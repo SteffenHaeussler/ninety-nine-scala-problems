@@ -58,3 +58,10 @@ class TestisPalindrome:
                                     List(8, 5, 3, 2, 1, 1))),
                             false)
     assertEquals(isPalindrome(List()), true)
+
+
+class TestFlatten:
+    @Test def t7(): Unit =
+    assertEquals(flatten(List(List(1, 1), 2, List(3, List(5, 8)))), List(1, 1, 2, 3, 5, 8))
+    assertEquals(flatten(List()), List())
+    assertEquals(flatten(List("abc", "def")), List("abc", "def"))

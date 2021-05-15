@@ -39,3 +39,11 @@ def reverse(lst: List[Any]): List[Any] =
 /** P06 (*) Find out whether a list is a palindrome. */
 def isPalindrome(lst: List[Any]): Boolean =
     return lst.reverse == lst
+
+
+/** P07 (**) Flatten a nested list structure. */
+def flatten(lst: List[Any]): List[Any] =
+    lst flatMap {
+        case i: List[_] => flatten(i)
+        case e => List(e)
+    }
