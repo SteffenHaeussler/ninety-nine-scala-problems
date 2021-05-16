@@ -47,3 +47,25 @@ def flatten(lst: List[Any]): List[Any] =
         case i: List[_] => flatten(i)
         case e => List(e)
     }
+
+
+/**  Eliminate consecutive duplicates of list elements. */
+def compress(lst: List[Any]): List[Any] =
+    lst.foldLeft(List[Any]()){
+        case (_lst, i) if (_lst.isEmpty || _lst.last != i) => _lst ::: List(i)
+        case (_lst, i) => _lst
+    }
+
+/**  P09 (**) Pack consecutive duplicates of list elements into sublists. */
+def pack(lst: List[Any]): List[List[Any]] =
+    if (lst.isEmpty) List(List())
+    else {
+        val (head, tail) = lst span {_ == lst.head}
+        if (tail == Nil) List(head)
+        else head :: pack(tail)
+    }
+
+
+// /**  P10 (*) Run-length encoding of a list. */
+def encode(lst: List[Any]): List[(Integer, Any)] =
+    pack(lst) map {i => (i.length, i.head)}

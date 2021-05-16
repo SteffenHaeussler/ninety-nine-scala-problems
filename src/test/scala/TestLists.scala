@@ -65,3 +65,35 @@ class TestFlatten:
     assertEquals(flatten(List(List(1, 1), 2, List(3, List(5, 8)))), List(1, 1, 2, 3, 5, 8))
     assertEquals(flatten(List()), List())
     assertEquals(flatten(List("abc", "def")), List("abc", "def"))
+
+
+class TestCompress:
+    @Test def t8(): Unit =
+    assertEquals(compress(List("a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e")),
+                List("a", "b", "c", "a", "d", "e"))
+    assertEquals(compress(List()), List())
+    assertEquals(compress(List(1, 1, 2, 3, 5, 8)), List(1, 2, 3, 5, 8))
+
+
+
+class TestPack:
+    @Test def t9(): Unit =
+    assertEquals(pack(List("a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e")),
+                List(List("a", "a", "a", "a"), List("b"), List("c", "c"),
+                    List("a", "a"), List("d"), List("e", "e", "e", "e")))
+    assertEquals(pack(List()), List(List()))
+    assertEquals(pack(List(1, 1, 2, 3, 5, 8)),
+                    List(List(1, 1), List(2), List(3),
+                        List(5), List(8)))
+
+class TestEncode:
+    @Test def t10(): Unit =
+    assertEquals(encode(List("a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e")),
+                List((4, "a"), (1, "b"), (2, "c"),
+                    (2, "a"), (1, "d"), (4, "e")))
+    // assertEquals(encode(List()), List(1, List()))
+    assertEquals(encode(List(1, 1, 2, 3, 5, 8)),
+                    List((2, 1), (1, 2), (1, 3),
+                        (1, 5), (1, 8)))
+
+
